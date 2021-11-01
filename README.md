@@ -1,5 +1,10 @@
 # Dialect map: Terraform
 
+[![CI/CD Status][ci-status-badge]][ci-status-link]
+[![Coverage Status][cov-status-badge]][cov-status-link]
+[![MIT license][mit-license-badge]][mit-license-link]
+[![Code style][code-style-badge]][code-style-link]
+
 
 ### About
 This repository contains the Terraform definition for all the necessary resources in order to run
@@ -100,6 +105,15 @@ The project storage components have the following access methods:
   The latter was designed following the [PostgreSQL guide][google-auth-docs-sql], in addition to the usage 
   of the `host` keyword to establish a [Unix Domain Connection][alchemy-conn-docs].
 
+
+[ci-status-badge]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/update.yml/badge.svg?branch=main
+[ci-status-link]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/update.yml?query=branch%3Amain
+[code-style-badge]: https://img.shields.io/badge/code%20style-terraform-purple.svg
+[code-style-link]: https://www.terraform.io/docs/language/syntax/style.html
+[cov-status-badge]: https://codecov.io/gh/dialect-map/dialect-map-terraform/branch/main/graph/badge.svg
+[cov-status-link]: https://codecov.io/gh/dialect-map/dialect-map-terraform
+[mit-license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+[mit-license-link]: https://github.com/dialect-map/dialect-map-terraform/blob/main/LICENSE
 
 [alchemy-conn-docs]: https://docs.sqlalchemy.org/en/13/dialects/postgresql.html#unix-domain-connections
 [dialect-map-repo]: https://github.com/dialect-map/dialect-map
