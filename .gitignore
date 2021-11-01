@@ -1,0 +1,3 @@
+# Possible local state drafts
+**/.terraform
+**/*.hcl
