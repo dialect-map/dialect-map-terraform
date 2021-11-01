@@ -1,0 +1,43 @@
+name: Dialect-map Infra CI
+
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "config/**/*.tf"
+      - "Makefile"
+
+
+env:
+  TERRAFORM_VERSION_CLI: "1.0.10"
+
+
+jobs:
+
+  check:
+    needs: []
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Clone current repository"
+        uses: actions/checkout@v2
+      - name: "Set up Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${TERRAFORM_VERSION_CLI}
+      - name: "Check Terraform files format"
+        run: make check
+
+  validate:
+    needs: [check]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Clone current repository"
+        uses: actions/checkout@v2
+      - name: "Set up Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${TERRAFORM_VERSION_CLI}
+      - name: "Validate Terraform files syntax"
+        run: make validate
