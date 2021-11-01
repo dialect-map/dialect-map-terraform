@@ -1,0 +1,70 @@
+name: Dialect-map Infra update
+
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "config/**/*.tf"
+      - "Makefile"
+
+
+env:
+  TERRAFORM_VERSION_CLI: "1.0.10"
+
+
+jobs:
+
+  check:
+    needs: []
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Clone current repository"
+        uses: actions/checkout@v2
+      - name: "Set up Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${TERRAFORM_VERSION_CLI}
+      - name: "Check Terraform files format"
+        run: make check
+
+  validate:
+    needs: [check]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Clone current repository"
+        uses: actions/checkout@v2
+      - name: "Set up Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${TERRAFORM_VERSION_CLI}
+      - name: "Validate Terraform files syntax"
+        run: make validate
+
+  apply:
+    needs: [validate]
+    runs-on: ubuntu-20.04
+    env:
+      PROJECT_SECRET_KEY: "${{ secrets.GCP_DIALECT_MAP_SA_KEY }}"
+      PROJECT_SECRET_PATH: "${{ github.workspace }}/dialect_map_key.json"
+
+      # These env. variables are used to populate secret values
+      TF_VAR_dialect_map_db_user: "${{ secrets.GCP_DIALECT_MAP_DB_USER }}"
+      TF_VAR_dialect_map_db_pass: "${{ secrets.GCP_DIALECT_MAP_DB_PASS }}"
+
+      # This env. variable is established so Terraform can authenticate with GCP
+      # Ref: https://cloud.google.com/docs/authentication/production
+      GOOGLE_APPLICATION_CREDENTIALS: "${{ github.workspace }}/dialect_map_key.json"
+
+    steps:
+      - name: "Clone current repository"
+        uses: actions/checkout@v2
+      - name: "Set up Terraform CLI"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${TERRAFORM_VERSION_CLI}
+      - name: "Download GCP Service Account key"
+        run: echo ${PROJECT_SECRET_KEY} > ${PROJECT_SECRET_PATH}
+      - name: "Apply Terraform changes"
+        run: make apply
