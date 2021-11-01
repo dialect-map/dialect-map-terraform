@@ -1,13 +1,13 @@
 # Dialect map: Terraform
 
 
-## About
-The _dialect-map_ folder contains the Terraform definition for all the necessary resources in order to run
-the [Dialect Map][dialect-map-repo] web application.
+### About
+This repository contains the Terraform definition for all the necessary resources in order to run
+the [Dialect map][dialect-map-repo] application.
 
 
-## 🤖 Automatic provisioning
-This repository has been design as a declarative, and **not actionable** set of Terraform definitions 🚫.
+### 🤖 Automatic provisioning
+This repository has been design as a declarative, and **not actionable** set of Terraform definitions.
 
 That means that all the modifications of the Terraform-defined resources **must not** be applied by any user,
 but for the repository itself using the _GitHub Actions_ CI/CD system.
@@ -15,7 +15,7 @@ but for the repository itself using the _GitHub Actions_ CI/CD system.
 The conditions at which the CI/CD jobs trigger is a sensitive matter, as we do not want them to modify production
 resources at an early stage. For this reason, we proposed the following conditions:
 
-### Validation
+#### Validation
 On _Pull Request_ creation, when a `.tf` file has been modified.
 
 ```yaml
@@ -27,7 +27,7 @@ on:
       - "config/**/*.tf"
 ```
 
-### Application
+#### Application
 On _push_ to the `main` branch, when a `.tf` file has been modified.
 
 ```yaml
@@ -40,13 +40,13 @@ on:
 ```
 
 
-## ☁️ Project provider
+### ☁️ Project provider
 For this project, _Google Cloud Platform_ (`google`) is used as the chosen provider where the required
 infrastructure will be hosted. The reason to rely on Google is that the integration with our existing NYU
 accounts is basically free, given the relation between NYU IT and Google.
 
 
-## 👤 Project authentication
+### 👤 Project authentication
 The authentication between GCP and the repository CI/CD is performed by using a Service Account key as a **GitHub secret**.
 
 This secret is read within the CI/CD steps and stored in a file, that can later be referenced by the env. variable
@@ -54,7 +54,7 @@ Terraform uses to connect to GCP projects: `GOOGLE_APPLICATION_CREDENTIALS`. Mor
 method can be found in the [official docs][google-auth-docs].
 
 
-## 🔐 Project secrets
+### 🔐 Project secrets
 In order to apply the Terraform configuration, there are secrets that need to be populated as environment variables.
 The naming of these env. variables must follow the `TF_VAR_<variable_name>` format specified in the official
 [Terraform documentation][terraform-vars-docs].
@@ -62,7 +62,7 @@ The naming of these env. variables must follow the `TF_VAR_<variable_name>` form
 The complete list of secret Terraform variables can be seen at the [main variables.tf file][main-path-variables].
 
 
-## 🗂️ Modules structure
+### 🗂️ Modules structure
 This project has been designed so that there is a 1:1 correspondence between Terraform modules and GCP products,
 all of which are defined within the `resources` folder. The reason not to choose _modules_ as the name of the folder
 is that _modules_ has a different connotation in GIT.
@@ -78,10 +78,10 @@ Some of these modules are:
 - **[storage][module-path-storage]**: to manage GC Storage buckets.
 
 
-## ⚙️ Components
+### ⚙️ Components
 The Dialect Map project has several inter-connected components in order to offer the complete functionality.
 
-### Computing components
+#### Computing components
 Those based on _Cloud Run_. Their access can be set to one of the following policies:
 - **Authenticated** requires a _Bearer_ token. See the [Terraform guide][terraform-run-iam-docs].
 - **Public access:** does not require a _Bearer_ token.
@@ -90,7 +90,7 @@ The project computing components have the following access policies:
 - **Backend API:** public to avoid Firebase (suggested by the [end-users Auth guide][google-auth-docs-run]).
 - **Frontend UI:** public by design.
 
-### Storage components
+#### Storage components
 Those based on _Cloud SQL_. Their access can be set by a combination of the following methods:
 - **White-listed IPs:** ranges of IPs that are always allowed.
 - **Cloud SQL Proxy:** authentication based connection from Cloud Run resources.
@@ -102,7 +102,7 @@ The project storage components have the following access methods:
 
 
 [alchemy-conn-docs]: https://docs.sqlalchemy.org/en/13/dialects/postgresql.html#unix-domain-connections
-[dialect-map-repo]: https://github.com/ds3-nyu-archive/ds-dialect-map
+[dialect-map-repo]: https://github.com/dialect-map/dialect-map
 [google-auth-docs]: https://cloud.google.com/docs/authentication/production
 [google-auth-docs-sql]: https://cloud.google.com/sql/docs/postgres/connect-run
 [google-auth-docs-run]: https://cloud.google.com/run/docs/authenticating/overview
