@@ -41,14 +41,14 @@ resource "google_project_service" "run-api" {
 # }
 
 
-module "ui-public" {
-  source                         = "./ui-public"
-  project_id                     = var.project_id
-  project_region                 = var.project_region
-  dialect_map_public_api_host    = "" # module.api-public.dialect_map_public_api_host
-  dialect_map_public_api_port    = "" # module.api-public.dialect_map_public_api_port
-  dialect_map_deployment_sa_name = var.dialect_map_deployment_sa_name
-
-  # Necessary to avoid eventual consistency errors
-  depends_on = [google_project_service.run-api]
-}
+# module "ui-public" {
+#   source                         = "./ui-public"
+#   project_id                     = var.project_id
+#   project_region                 = var.project_region
+#   dialect_map_public_api_host    = "" # module.api-public.dialect_map_public_api_host
+#   dialect_map_public_api_port    = "" # module.api-public.dialect_map_public_api_port
+#   dialect_map_deployment_sa_name = var.dialect_map_deployment_sa_name
+#
+#   # Necessary to avoid eventual consistency errors
+#   depends_on = [google_project_service.run-api]
+# }

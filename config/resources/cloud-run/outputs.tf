@@ -10,7 +10,7 @@
 #   description = "Public API assigned host address"
 # }
 
-output "dialect_map_public_ui_host" {
-  value       = module.ui-public.dialect_map_public_ui_host
-  description = "Public UI assigned host address"
-}
+# output "dialect_map_public_ui_host" {
+#   value       = module.ui-public.dialect_map_public_ui_host
+#   description = "Public UI assigned host address"
+# }
