@@ -14,7 +14,7 @@ resource "google_cloud_run_service" "dialect-map-private-api" {
   template {
     spec {
       containers {
-        image = "us.gcr.io/${var.project_id}/dialect-map-private-api:0.2.7"
+        image = "us.gcr.io/${var.project_id}/dialect-map-private-api:0.5.0"
 
         ports {
           container_port = 8080
