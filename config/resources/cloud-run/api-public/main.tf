@@ -13,7 +13,7 @@ resource "google_cloud_run_service" "dialect-map-public-api" {
   template {
     spec {
       containers {
-        image = "us.gcr.io/${var.project_id}/dialect-map-public-api:0.2.8"
+        image = "us.gcr.io/${var.project_id}/dialect-map-public-api:0.5.0"
 
         ports {
           container_port = 8080
