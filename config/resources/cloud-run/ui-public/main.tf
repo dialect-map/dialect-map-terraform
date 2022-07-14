@@ -7,7 +7,7 @@ resource "google_cloud_run_service" "dialect-map-ui" {
   template {
     spec {
       containers {
-        image = "us.gcr.io/${var.project_id}/dialect-map-ui:0.2.3-search-only"
+        image = "us.gcr.io/${var.project_id}/dialect-map-ui:0.3.0-search-only"
 
         ports {
           container_port = 5000
