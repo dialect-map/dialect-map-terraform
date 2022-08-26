@@ -18,33 +18,33 @@ jobs:
 
   check:
     needs: []
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
-      - name: "Check Terraform files format"
+      - name: "Check format"
         run: make check
 
   validate:
     needs: [check]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
-      - name: "Validate Terraform files syntax"
+      - name: "Validate syntax"
         run: make validate
 
   apply:
     needs: [validate]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       PROJECT_SECRET_KEY: "${{ secrets.GCP_DIALECT_MAP_SA_KEY }}"
       PROJECT_SECRET_PATH: "${{ github.workspace }}/dialect_map_key.json"
@@ -59,9 +59,9 @@ jobs:
 
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
       - name: "Download GCP Service Account key"
