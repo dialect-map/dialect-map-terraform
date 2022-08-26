@@ -106,8 +106,8 @@ The project storage components have the following access methods:
   of the `host` keyword to establish a [Unix Domain Connection][alchemy-conn-docs].
 
 
-[ci-status-badge]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/update.yml/badge.svg?branch=main
-[ci-status-link]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/update.yml?query=branch%3Amain
+[ci-status-badge]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/ci.yml/badge.svg?branch=main
+[ci-status-link]: https://github.com/dialect-map/dialect-map-terraform/actions/workflows/ci.yml?query=branch%3Amain
 [code-style-badge]: https://img.shields.io/badge/code%20style-terraform-purple.svg
 [code-style-link]: https://www.terraform.io/docs/language/syntax/style.html
 [cov-status-badge]: https://codecov.io/gh/dialect-map/dialect-map-terraform/branch/main/graph/badge.svg
