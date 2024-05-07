@@ -12,13 +12,12 @@ the [Dialect map][dialect-map-repo] application.
 
 
 ### 🤖 Automatic provisioning
-This repository has been design as a declarative, and **not actionable** set of Terraform definitions.
+This repository has been designed as a declarative, and **not actionable** set of Terraform definitions.
 
 That means that all the modifications of the Terraform-defined resources **must not** be applied by any user,
-but for the repository itself using the _GitHub Actions_ CI/CD system.
-
-The conditions at which the CI/CD jobs trigger is a sensitive matter, as we do not want them to modify production
-resources at an early stage. For this reason, we proposed the following conditions:
+but for the repository itself using the _GitHub Actions_ CI/CD system. The conditions at which the CI/CD jobs trigger
+is a sensitive matter, as we do not want them to modify production resources at an early stage. For this reason,
+we proposed the following conditions:
 
 #### Validation
 On _Pull Request_ creation, when a `.tf` file has been modified.
