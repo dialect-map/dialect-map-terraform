@@ -26,9 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
       - name: "Check format"
@@ -39,9 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
       - name: "Validate syntax"
@@ -64,9 +64,9 @@ jobs:
 
     steps:
       - name: "Clone current repository"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: "Set up Terraform CLI"
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${TERRAFORM_VERSION_CLI}
       - name: "Download GCP Service Account key"
